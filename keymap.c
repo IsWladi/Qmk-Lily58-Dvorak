@@ -9,6 +9,7 @@ enum layer_number {
     _LOWER,
     _HIGHER,
     _ADJUST,
+    _NUMPAD,
 };
 
 // Tap Dance definitions
@@ -120,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT( \
     KC_DEL,            KC_1,           KC_2,           KC_3,           KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,    TD(TD_PSCREN), \
     KC_CAPS,           TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),    KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    RSFT_T(KC_CAPS), \
-    LSFT_T(KC_TAB),    KC_A,           KC_O,           KC_E,           KC_U,    KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
+    LSFT_T(KC_TAB),    KC_A,           KC_O,           KC_E, LT(_NUMPAD,KC_U),     KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
     KC_LCTRL,          TD(TD_DOTS),    KC_Q,           KC_J,           KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RCTRL, \
                                                    KC_LALT, KC_LGUI, LT(_LOWER,KC_SPC), KC_ESC,                       RECORTE, LT(_HIGHER,KC_ENT), KC_ESC, KC_RGUI \
                                                    ),
@@ -191,6 +192,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, RGB_MOD,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET, \
     XXXXXXX, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
                                 XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX \
+    ),
+
+    [_NUMPAD] = LAYOUT( \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX,KC_KP_7,KC_KP_8,KC_KP_9, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX,KC_KP_4,KC_KP_5,KC_KP_6, XXXXXXX, _______, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_KP_1,KC_KP_2,KC_KP_3, XXXXXXX, XXXXXXX,\
+                                XXXXXXX, XXXXXXX, KC_SPC, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX \
     )
     };
 
