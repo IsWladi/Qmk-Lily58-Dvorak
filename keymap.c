@@ -87,11 +87,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_BIGT]     = ACTION_TAP_DANCE_DOUBLE(KC_DOT, S(KC_NUBS)), // . >
     [TD_SIM1]     = ACTION_TAP_DANCE_DOUBLE(KC_PAST, KC_PSLS), // * /
     [TD_SIM2]     = ACTION_TAP_DANCE_DOUBLE(S(KC_6), KC_GRV), // & |
-    [TD_SIM4]     = ACTION_TAP_DANCE_DOUBLE(KC_PERC, RALT(KC_QUOT)), // % ^
+    [TD_SIM4]     = ACTION_TAP_DANCE_DOUBLE(KC_PERC, S(KC_3)), // % #
     [TD_SIM5]     = ACTION_TAP_DANCE_DOUBLE(S(KC_SLSH), RALT(KC_RBRC)), // _  ~
     
     [TD_SIM8]     = ACTION_TAP_DANCE_DOUBLE(S(KC_0),  RALT(KC_Q)), // = @
-    [TD_SIM9]     = ACTION_TAP_DANCE_DOUBLE(S(KC_3), S(KC_4)), // # $
+    [TD_SIM9]     = ACTION_TAP_DANCE_DOUBLE(RALT(KC_QUOT), S(KC_4)), //^ $
     [TD_SIM10]    = ACTION_TAP_DANCE_DOUBLE(RALT(KC_NUHS), RALT(KC_MINS)), // ` BACKSLASH
     [TD_SIM12]    = ACTION_TAP_DANCE_DOUBLE(KC_PPLS, KC_PMNS), // + -
 
@@ -143,8 +143,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LOWER] = LAYOUT( \
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                     XXXXXXX,     XXXXXXX,     KC_MPRV,     KC_MPLY,     KC_MNXT,     KC_BSPC,\
     _______, KC_F6,   KC_F7,   KC_LALT,   KC_TAB,   KC_F10,                                    XXXXXXX,    XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX,     KC_AUDIO_VOL_UP, \
-    _______, KC_F11,  KC_F12,  COPY,  PASTE,  KC_F13,                                       TD(TD_SIM1), TD(TD_INTE), TD(TD_SIM2), TD(TD_SIM4), TD(TD_SIM5), KC_AUDIO_MUTE, \
-    _______, XXXXXXX, XXXXXXX, KC_PGDN, KC_PGUP, XXXXXXX, XXXXXXX,                 XXXXXXX, XXXXXXX,       XXXXXXX,        XXXXXXX,       XXXXXXX,        XXXXXXX,     KC_AUDIO_VOL_DOWN, \
+    _______, KC_PGDN, KC_PGUP, COPY,  PASTE,  KC_F13,                                       TD(TD_SIM1), TD(TD_INTE), TD(TD_SIM2), TD(TD_SIM4), TD(TD_SIM5), KC_AUDIO_MUTE, \
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                 XXXXXXX,XXXXXXX, XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX, KC_AUDIO_VOL_DOWN, \
                                _______, _______, _______, _______,                          _______, _______, _______, _______\
     ),
 
