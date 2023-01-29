@@ -10,6 +10,7 @@ enum layer_number {
     _HIGHER,
     _ADJUST,
     _NUMPAD,
+    _VIM,
 };
 
 // Tap Dance definitions
@@ -38,6 +39,8 @@ enum {
 // Creamos nuestros keycodes personalizados
 enum custom_keycodes {
   RECORTE = SAFE_RANGE,
+  BUSCADOR,
+  MAYUS,
   MAX,
   MIN,
   DESK,
@@ -119,8 +122,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_QWERTY] = LAYOUT( \
-    KC_DEL,            KC_1,           KC_2,           KC_3,           KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,    TD(TD_PSCREN), \
-    KC_CAPS,           TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),    KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    RSFT_T(KC_CAPS), \
+    KC_DEL,            TG(_VIM),     KC_2,           KC_3,           KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,    TD(TD_PSCREN), \
+    MAYUS,           TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),    KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    RSFT_T(KC_CAPS), \
     LSFT_T(KC_TAB),    KC_A,           KC_O,           KC_E, LT(_NUMPAD,KC_U),     KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
     KC_LCTRL,          TD(TD_DOTS),    KC_Q,           KC_J,           KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RCTRL, \
                                                    KC_LALT, KC_LGUI, LT(_LOWER,KC_SPC), KC_ESC,                       RECORTE, LT(_HIGHER,KC_ENT), KC_ESC, KC_RGUI \
@@ -166,7 +169,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_HIGHER] = LAYOUT( \
     XXXXXXX, XXXXXXX,       XXXXXXX,       XXXXXXX,        XXXXXXX,       XXXXXXX,                             XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, \
     _______, KC_HOME,       KC_PGUP,       KC_PSCR,        XXXXXXX,         XXXXXXX,                           DESK,    MAX,       MIN,     CLOSE,   WT,      XXXXXXX, \
-    _______, TD(TD_SIM8),   TD(TD_SIM9),   TD(TD_SIM10),   TD(TD_EXCLA),  TD(TD_SIM12),                        XXXXXXX,  KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT,    _______, \
+    _______, TD(TD_SIM8),   TD(TD_SIM9),   TD(TD_SIM10),   TD(TD_EXCLA),  TD(TD_SIM12),                        BUSCADOR,KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT,    _______, \
     _______, KC_DEL,        KC_DEL,        KC_PGUP,         KC_PGDN,       KC_LCTRL,       XXXXXXX,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,     XXXXXXX, \
                                                             _______, _______, XXXXXXX,  XXXXXXX,      XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX \
     ),
@@ -197,9 +200,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NUMPAD] = LAYOUT( \
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX,KC_KP_7,KC_KP_8,KC_KP_9, XXXXXXX, XXXXXXX, \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX,KC_KP_4,KC_KP_5,KC_KP_6, XXXXXXX, _______, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_KP_0,KC_KP_4,KC_KP_5,KC_KP_6, XXXXXXX, _______, \
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_KP_1,KC_KP_2,KC_KP_3, XXXXXXX, XXXXXXX,\
                                 XXXXXXX, XXXXXXX, KC_SPC, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX \
+    ),
+
+    [_VIM] = LAYOUT( \
+    XXXXXXX, TG(_VIM), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_H,    KC_J,    KC_K,    KC_L,    XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+                                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX \
     )
     };
 
@@ -336,7 +347,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       break;
 
+      case MAYUS: 
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_CAPS));
+        rgblight_toggle();
+        return true;
+      }
+      break;
 
+      case BUSCADOR:
+      if (record->event.pressed) {
+        SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_SPC));
+        return true;
+      }else {
+        // Cuando la tecla es liberada
+        clear_keyboard();
+      }
+      break;
     }
     return true;
 }
