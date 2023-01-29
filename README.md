@@ -1,3 +1,8 @@
-# Enfoque en progresivamente usar menos el mouse y teclear de la manera más eficiente posible usando layaut Dvorak y teclado con logica de capas.
+# Razón de existir
+*Integrar neovim con layout Dvorak en un split keyboard(Lily58) usando QMK con apoyo de la configuracion de neovim*
 
-qmk lily58 para windows 11 distribucion latinoamericana español
+*para windows 11 distribucion latinoamericana español*
+
+
+# Problemas:
+*errores en la integración de dvorak con vim, no apto para uso productivo*
