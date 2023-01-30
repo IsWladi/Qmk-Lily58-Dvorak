@@ -50,6 +50,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define RGBLIGHT_EFFECT_SNAKE
 //#define RGBLIGHT_EFFECT_STATIC_GRADIENT
 //#define RGBLIGHT_EFFECT_TWINKLE
+#define RGBLIGHT_LAYERS
 #define RGBLED_NUM 16
 #define RGBLIGHT_LIMIT_VAL 100
 #define RGBLIGHT_HUE_STEP 10
