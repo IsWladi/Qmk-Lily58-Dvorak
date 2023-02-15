@@ -1,12 +1,21 @@
 # Razón de existir
 *Mejorar la ergonomia de trabajo integrando neovim con layout Dvorak en un split keyboard(Lily58 pro) usando QMK con apoyo de la configuracion de neovim*
 
-Requisitos para asegurar compatibilidad
+## Funcionalidades más relevantes
+---------------
+* macros para navegación en windows sin mouse
+* layer especializado para usar el teclado como mouse
+* indicador de block mayus con led underglow
+* separación de codigo según logica del mismo
+
+## Requisitos para asegurar compatibilidad
 ---------------
 * QMK Firmware 0.18.9
 * Lily58 pro
 * Windows 11 distribucion latinoamericana español
+* PowerToys(para macro de alt + espacio)
 
-Problemas
+
+### Problemas
 ---------------
 * errores en la integración de dvorak layout con vim por remapeo de hjkl
