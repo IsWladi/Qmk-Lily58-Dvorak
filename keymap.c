@@ -123,11 +123,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_QWERTY] = LAYOUT( \
-    KC_DEL,            CHROME,       KC_2,         KC_3,           KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,    TD(TD_PSCREN), \
-    MAYUS,             TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),    KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    RSFT_T(KC_CAPS), \
+    KC_DEL,            KC_1,       KC_2,         KC_3,           KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,   XXXXXXX, \
+    MAYUS,             TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),    KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    LSFT_T(KC_LBRC), \
     LSFT_T(KC_TAB),    KC_A,           KC_O,           KC_E, LT(_NUMPAD,KC_U),     KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
     KC_LCTRL,          TD(TD_DOTS),    KC_Q,           KC_J,           KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RCTRL, \
-                                                   KC_LALT, KC_LGUI, LT(_LOWER,KC_SPC), KC_ESC,                       RECORTE, LT(_HIGHER,KC_ENT), KC_ESC, KC_RGUI \
+                                                   KC_LALT, RECORTE, LT(_LOWER,KC_SPC), KC_ESC,                       CHROME, LT(_HIGHER,KC_ENT), KC_ESC, KC_RGUI \
                                                    ),
 
     /* LOWER
@@ -209,180 +209,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    
     [_NAVEGAR] = LAYOUT( \
-    XXXXXXX, CHROME, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    XXXXXXX, XXXXXXX, KC_KP_7,    KC_KP_8,    KC_KP_9,    XXXXXXX,                   XXXXXXX, KC_KP_7,     KC_KP_8,    KC_KP_9,    XXXXXXX, XXXXXXX, \
-    XXXXXXX, XXXXXXX, KC_KP_4,    KC_KP_5,    KC_KP_6,    KC_LCTRL,                  KC_RCTRL, KC_KP_4,     KC_KP_5,    KC_KP_6,    XXXXXXX, _______, \
-    XXXXXXX, XXXXXXX, KC_KP_1,    KC_KP_2,    KC_KP_3,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_KP_1,     KC_KP_2,    KC_KP_3,    XXXXXXX, XXXXXXX,\
-                                XXXXXXX, XXXXXXX, KC_SPC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, KC_KP_7, KC_KP_8, KC_KP_9, XXXXXXX,                      XXXXXXX, KC_KP_7, KC_KP_8, KC_KP_9, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, KC_KP_4, KC_KP_5, KC_KP_6, KC_LCTRL,                     KC_RCTRL,KC_KP_4, KC_KP_5, KC_KP_6, XXXXXXX, _______, \
+    XXXXXXX, XXXXXXX, KC_KP_1, KC_KP_2, KC_KP_3, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, KC_KP_1, KC_KP_2, KC_KP_3, XXXXXXX, XXXXXXX,\
+                                XXXXXXX, XXXXXXX, KC_SPC, XXXXXXX,    CHROME,  XXXXXXX, XXXXXXX, XXXXXXX \
     ),
 
     };
 
-layer_state_t layer_state_set_user(layer_state_t state) {
-    return update_tri_layer_state(state, _LOWER, _HIGHER, _ADJUST);
-}
-
-// SSD1306 OLED update loop, make sure to enable OLED_ENABLE=yes in rules.mk
-#ifdef OLED_ENABLE
-
-oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    if (!is_keyboard_master()) return OLED_ROTATION_180; // flips the display 180 degrees if offhand
-    return rotation;
-}
-
-// When you add source files to SRC in rules.mk, you can use functions.
-const char *read_layer_state(void);
-const char *read_logo(void);
-void        set_keylog(uint16_t keycode, keyrecord_t *record);
-const char *read_keylog(void);
-const char *read_keylogs(void);
-
-// const char *read_mode_icon(bool swap);
-// const char *read_host_led_state(void);
-// void set_timelog(void);
-// const char *read_timelog(void);
-
-bool oled_task_user(void) {
-    if (is_keyboard_master()) {
-        // If you want to change the display of OLED, you need to change here
-        oled_write_ln(read_layer_state(), false);
-        oled_write_ln(read_keylog(), false);
-        oled_write_ln(read_keylogs(), false);
-        // oled_write_ln(read_mode_icon(keymap_config.swap_lalt_lgui), false);
-        // oled_write_ln(read_host_led_state(), false);
-        // oled_write_ln(read_timelog(), false);
-    } else {
-        oled_write(read_logo(), false);
-    }
-    return true;
-}
-#endif // OLED_ENABLE
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        #ifdef OLED_ENABLE
-            set_keylog(keycode, record);
-        #endif
-    }
-    switch (keycode) {
-      case LT(0,KC_N):
-            if (!record->tap.count && record->event.pressed) {
-                tap_code16(KC_SCLN); // Intercept hold function to send Ñ
-                return false;
-            }
-            return true; // Return true for normal processing of tap keycode
-
-      case WT:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LGUI("r"));
-        _delay_ms(500);
-        SEND_STRING("wt" SS_TAP(X_ENTER));
-        return true;
-      }
-      break;          
-
-      case RECORTE: //Macro en la que dejamos pulsadas las teclas
-      if (record->event.pressed){
-        // Cuando se pulsa la tecla con el keycode seleccionado
-        SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LSFT) SS_DOWN(X_S));
-      } else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
-      case COPY: //Macro en la que dejamos pulsadas las teclas
-      if (record->event.pressed){
-        // Cuando se pulsa la tecla con el keycode seleccionado
-        SEND_STRING(SS_DOWN(X_LCTRL) SS_DOWN(X_C));
-      } else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
-      case PASTE: //Macro en la que dejamos pulsadas las teclas
-      if (record->event.pressed){
-        // Cuando se pulsa la tecla con el keycode seleccionado
-        SEND_STRING(SS_DOWN(X_LCTRL) SS_DOWN(X_V));
-      } else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
-      case CLOSE: //Macro en la que dejamos pulsadas las teclas
-      if (record->event.pressed){
-        // Cuando se pulsa la tecla con el keycode seleccionado
-        SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_F4));
-      } else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
-      case MAX: //Macro en la que dejamos pulsadas las teclas
-      if (record->event.pressed){
-        // Cuando se pulsa la tecla con el keycode seleccionado
-        SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_UP));
-      } else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-     
-      case MIN: //Macro en la que dejamos pulsadas las teclas
-      if (record->event.pressed){
-        // Cuando se pulsa la tecla con el keycode seleccionado
-        SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_DOWN));
-      } else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
-      case DESK: //Macro en la que dejamos pulsadas las teclas
-      if (record->event.pressed){
-        // Cuando se pulsa la tecla con el keycode seleccionado
-        SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_D));
-      } else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
-      case MAYUS: 
-      if (record->event.pressed) {
-        SEND_STRING(SS_TAP(X_CAPS));
-        rgblight_toggle();
-        rgblight_increase_hue();
-        rgblight_decrease_hue();
-        return true;
-      }
-      break;
-
-      case BUSCADOR:
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_SPC));
-        return true;
-      }else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
-      case CHROME:
-      if (record->event.pressed) {
-        if (IS_LAYER_ON(_NAVEGAR)) {
-          layer_off(_NAVEGAR);
-          SEND_STRING(SS_TAP(X_NUMLOCK));
-        } else {
-          layer_on(_NAVEGAR);
-          SEND_STRING(SS_TAP(X_NUMLOCK));
-        }
-        return true;
-      }
-      break;
-    }
-    return true;
-}
+#include "oled.c"
+#include "macros.c"
