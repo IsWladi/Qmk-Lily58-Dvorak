@@ -19,3 +19,6 @@
 ### Problemas
 ---------------
 * errores en la integración de dvorak layout con vim por remapeo de hjkl
+
+### Referencia
+*Repositorio usado en conjunto con https://github.com/Wladimir3984/Neovim-Dvorak para sacarle más provecho*
