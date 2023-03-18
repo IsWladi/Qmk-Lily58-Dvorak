@@ -45,6 +45,16 @@
       }
       break;
 
+      case NVIM_VB: //nvim modo visual bloque
+      if (record->event.pressed){
+        // Cuando se pulsa la tecla con el keycode seleccionado
+        SEND_STRING(SS_DOWN(X_LCTRL) SS_DOWN(X_LALT) SS_TAP(X_V));
+      } else {
+        // Cuando la tecla es liberada
+        clear_keyboard();
+      }
+      break;
+
       case CLOSE: //Macro en la que dejamos pulsadas las teclas
       if (record->event.pressed){
         // Cuando se pulsa la tecla con el keycode seleccionado
@@ -105,16 +115,34 @@
       }
       break;
 
-      case CHROME:
+      case NUMTOGGLE:
       if (record->event.pressed) {
-        if (IS_LAYER_ON(_NAVEGAR)) {
-          layer_off(_NAVEGAR);
-          SEND_STRING(SS_TAP(X_NUMLOCK));
+        if (IS_LAYER_ON(_NUMPAD)) {
+          rgblight_toggle();
+          rgblight_increase_hue();
+          rgblight_decrease_hue();
+          layer_off(_NUMPAD);
+
         } else {
-          layer_on(_NAVEGAR);
-          SEND_STRING(SS_TAP(X_NUMLOCK));
+          rgblight_toggle();
+          rgblight_increase_hue();
+          rgblight_decrease_hue();
+          layer_on(_NUMPAD);
         }
         return true;
+      }
+      break;
+
+      case NVIM_EMMET:
+      if (record->event.pressed) {
+        SEND_STRING(SS_DOWN(X_LCTRL) SS_TAP(X_Y));
+        clear_keyboard();
+        SEND_STRING(SS_TAP(X_COMM));
+
+        return true;
+      }else {
+        // Cuando la tecla es liberada
+        clear_keyboard();
       }
       break;
     }

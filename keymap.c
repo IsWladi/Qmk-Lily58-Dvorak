@@ -9,7 +9,6 @@ enum layer_number {
     _LOWER,
     _HIGHER,
     _ADJUST,
-    _NAVEGAR,
     _NUMPAD,
 };
 
@@ -39,7 +38,6 @@ enum {
 // Creamos nuestros keycodes personalizados
 enum custom_keycodes {
   RECORTE = SAFE_RANGE,
-  CHROME,
   BUSCADOR,
   MAYUS,
   MAX,
@@ -49,6 +47,9 @@ enum custom_keycodes {
   WT,
   COPY,
   PASTE,
+  NVIM_VB,
+  NVIM_EMMET,
+  NUMTOGGLE,
 };
 
 void ts_action_SIMB(qk_tap_dance_state_t *state, void *user_data) {
@@ -63,9 +64,9 @@ void ts_action_LEFT_PAR_BRA(qk_tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         SEND_STRING(SS_LSFT(SS_TAP(X_8)));
     } else if (state->count == 2) {
-        SEND_STRING(SS_TAP(X_QUOTE));
-    } else {
         SEND_STRING(SS_LSFT(SS_TAP(X_QUOTE)));
+    } else {
+        SEND_STRING(SS_TAP(X_QUOTE));
     }
     reset_tap_dance(state);
 }
@@ -73,9 +74,9 @@ void ts_action_RIGHT_PAR_BRA(qk_tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         SEND_STRING(SS_LSFT(SS_TAP(X_9)));
     } else if (state->count == 2) {
-        SEND_STRING(SS_TAP(X_NUHS));
-    } else {
         SEND_STRING(SS_LSFT(SS_TAP(X_NUHS)));
+    } else {
+        SEND_STRING(SS_TAP(X_NUHS));
     }
     reset_tap_dance(state);
 }
@@ -89,11 +90,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_DOTS]     = ACTION_TAP_DANCE_DOUBLE(S(KC_DOT), S(KC_COMM)), // : ;
     [TD_MINT]     = ACTION_TAP_DANCE_DOUBLE(KC_COMM, KC_NUBS), // , <
     [TD_BIGT]     = ACTION_TAP_DANCE_DOUBLE(KC_DOT, S(KC_NUBS)), // . >
-    [TD_SIM1]     = ACTION_TAP_DANCE_DOUBLE(KC_PAST, KC_PSLS), // * /
+    [TD_SIM1]     = ACTION_TAP_DANCE_DOUBLE(KC_PSLS, KC_PAST), // / *
     [TD_SIM2]     = ACTION_TAP_DANCE_DOUBLE(S(KC_6), KC_GRV), // & |
     [TD_SIM4]     = ACTION_TAP_DANCE_DOUBLE(KC_PERC, S(KC_3)), // % #
     [TD_SIM5]     = ACTION_TAP_DANCE_DOUBLE(S(KC_SLSH), RALT(KC_RBRC)), // _  ~
-    
+     
     [TD_SIM8]     = ACTION_TAP_DANCE_DOUBLE(S(KC_0),  RALT(KC_Q)), // = @
     [TD_SIM9]     = ACTION_TAP_DANCE_DOUBLE(RALT(KC_QUOT), S(KC_4)), //^ $
     [TD_SIM10]    = ACTION_TAP_DANCE_DOUBLE(RALT(KC_NUHS), RALT(KC_MINS)), // ` BACKSLASH
@@ -123,11 +124,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_QWERTY] = LAYOUT( \
-    KC_DEL,            KC_1,       KC_2,         KC_3,           KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,   XXXXXXX, \
+    KC_DEL,            KC_1,       KC_2,         KC_3,           KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,   RECORTE, \
     MAYUS,             TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),    KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    LSFT_T(KC_LBRC), \
     LSFT_T(KC_TAB),    KC_A,           KC_O,           KC_E, LT(_NUMPAD,KC_U),     KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
     KC_LCTRL,          TD(TD_DOTS),    KC_Q,           KC_J,           KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RCTRL, \
-                                                   KC_LALT, RECORTE, LT(_LOWER,KC_SPC), KC_ESC,                       CHROME, LT(_HIGHER,KC_ENT), KC_ESC, KC_RGUI \
+                                                   KC_LALT, NVIM_EMMET, LT(_LOWER,KC_SPC), KC_ESC,                       NUMTOGGLE, LT(_HIGHER,KC_ENT), NVIM_VB, KC_RGUI \
                                                    ),
 
     /* LOWER
@@ -201,19 +202,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMPAD] = LAYOUT( \
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX,KC_7,KC_8,KC_9, XXXXXXX, XXXXXXX, \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_0,KC_4,KC_5,KC_6, XXXXXXX, _______, \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_1,KC_2,KC_3, XXXXXXX, XXXXXXX,\
-                                XXXXXXX, XXXXXXX, KC_SPC, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX \
-    ),
-
-   
-    [_NAVEGAR] = LAYOUT( \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    XXXXXXX, XXXXXXX, KC_KP_7, KC_KP_8, KC_KP_9, XXXXXXX,                      XXXXXXX, KC_KP_7, KC_KP_8, KC_KP_9, XXXXXXX, XXXXXXX, \
-    XXXXXXX, XXXXXXX, KC_KP_4, KC_KP_5, KC_KP_6, KC_LCTRL,                     KC_RCTRL,KC_KP_4, KC_KP_5, KC_KP_6, XXXXXXX, _______, \
-    XXXXXXX, XXXXXXX, KC_KP_1, KC_KP_2, KC_KP_3, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, KC_KP_1, KC_KP_2, KC_KP_3, XXXXXXX, XXXXXXX,\
-                                XXXXXXX, XXXXXXX, KC_SPC, XXXXXXX,    CHROME,  XXXXXXX, XXXXXXX, XXXXXXX \
+    XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,                   XXXXXXX,KC_7,KC_8,KC_9, XXXXXXX, XXXXXXX, \
+    KC_TAB, XXXXXXX, XXXXXXX, XXXXXXX, TD(TD_SIM12), TD(TD_SIM1),           KC_0,KC_4,KC_5,KC_6, XXXXXXX, KC_BSPC, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, KC_1,KC_2,KC_3, XXXXXXX, XXXXXXX,\
+                                XXXXXXX, XXXXXXX, KC_SPC, XXXXXXX, NUMTOGGLE,  KC_ENT, XXXXXXX, XXXXXXX \
     ),
 
     };
