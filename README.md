@@ -4,9 +4,10 @@
 ## Funcionalidades más relevantes
 ---------------
 * macros para navegación en windows sin mouse
-* layer especializado para usar el teclado como mouse
 * indicador de block mayus con led underglow
 * separación de codigo según logica del mismo
+* numpad dinamico y estatico
+* macros para neovim(emmet y bloque visual)
 
 ## Requisitos para asegurar compatibilidad
 ---------------
