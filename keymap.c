@@ -124,11 +124,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_QWERTY] = LAYOUT( \
-    KC_DEL,            KC_1,       KC_2,         KC_3,           KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,   RECORTE, \
-    MAYUS,             TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),    KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    LSFT_T(KC_LBRC), \
-    LSFT_T(KC_TAB),    KC_A,           KC_O,           KC_E, LT(_NUMPAD,KC_U),     KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
-    KC_LCTRL,          TD(TD_DOTS),    KC_Q,           KC_J,           KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RCTRL, \
-                                                   KC_LALT, NVIM_EMMET, LT(_LOWER,KC_SPC), KC_ESC,                       NUMTOGGLE, LT(_HIGHER,KC_ENT), NVIM_VB, KC_RGUI \
+    KC_DEL,         KC_1,           KC_2,           KC_3,           KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,   RECORTE, \
+    MAYUS,          TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),    KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    LSFT_T(KC_LBRC), \
+    LSFT_T(KC_TAB), KC_A,           KC_O,           KC_E, LT(_NUMPAD,KC_U),  KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
+    KC_LCTRL,       TD(TD_DOTS),    KC_Q,           KC_J,           KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RGUI, \
+                                                 KC_LALT, NVIM_EMMET, LT(_LOWER,KC_SPC), KC_ESC,      LCTL_T(KC_COMM), LT(_HIGHER,KC_ENT), NVIM_VB, NUMTOGGLE \
                                                    ),
 
     /* LOWER
@@ -202,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMPAD] = LAYOUT( \
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,                   XXXXXXX,KC_7,KC_8,KC_9, XXXXXXX, XXXXXXX, \
+    XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_I,                   XXXXXXX,KC_7,KC_8,KC_9, XXXXXXX, XXXXXXX, \
     KC_TAB, XXXXXXX, XXXXXXX, XXXXXXX, TD(TD_SIM12), TD(TD_SIM1),           KC_0,KC_4,KC_5,KC_6, XXXXXXX, KC_BSPC, \
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, KC_1,KC_2,KC_3, XXXXXXX, XXXXXXX,\
                                 XXXXXXX, XXXXXXX, KC_SPC, XXXXXXX, NUMTOGGLE,  KC_ENT, XXXXXXX, XXXXXXX \
