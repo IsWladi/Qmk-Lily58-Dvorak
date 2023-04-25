@@ -170,7 +170,7 @@
 
       case TERM_TAB: // ctrl tab cambiarse de terminal
       if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LCTRL) SS_DOWN(X_TAB);
+        SEND_STRING(SS_DOWN(X_LCTRL) SS_TAP(X_TAB));
 
         return true;
       }else {
