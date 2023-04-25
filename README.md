@@ -7,7 +7,7 @@
 * indicador de block mayus con led underglow
 * separación de codigo según logica del mismo
 * numpad dinamico y estatico
-* macros para neovim(emmet y bloque visual)
+* macros para neovim(emmet y bloque visual), para terminal
 
 ## Requisitos para asegurar compatibilidad
 ---------------
@@ -15,11 +15,12 @@
 * Lily58 pro
 * Windows 11 distribucion latinoamericana español
 * PowerToys(para macro de alt + espacio)
+* Windows terminal
 
 
 ### Problemas
 ---------------
-* errores en la integración de dvorak layout con vim por remapeo de hjkl
+* errores en la integración de dvorak layout con nvim por remapeo de hjkl
 
 ### Referencia
-*Repositorio usado en conjunto con https://github.com/Wladimir3984/Neovim-Dvorak para sacarle más provecho*
+*Repositorio usado en conjunto con [https://github.com/Wladimir3984/Neovim-Dvorak](https://github.com/Wladimir3984/Nvim) para sacarle más provecho*
