@@ -43,13 +43,16 @@ enum custom_keycodes {
   MAX,
   MIN,
   DESK,
-  CLOSE, 
+  CLOSE,
   WT,
   COPY,
   PASTE,
+  NUMTOGGLE,
   NVIM_VB,
   NVIM_EMMET,
-  NUMTOGGLE,
+  TERM_DUPLI,
+  TERM_CLOSE,
+  TERM_TAB,
 };
 
 void ts_action_SIMB(qk_tap_dance_state_t *state, void *user_data) {
@@ -94,13 +97,13 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_SIM2]     = ACTION_TAP_DANCE_DOUBLE(S(KC_6), KC_GRV), // & |
     [TD_SIM4]     = ACTION_TAP_DANCE_DOUBLE(KC_PERC, S(KC_3)), // % #
     [TD_SIM5]     = ACTION_TAP_DANCE_DOUBLE(S(KC_SLSH), RALT(KC_RBRC)), // _  ~
-     
+
     [TD_SIM8]     = ACTION_TAP_DANCE_DOUBLE(S(KC_0),  RALT(KC_Q)), // = @
     [TD_SIM9]     = ACTION_TAP_DANCE_DOUBLE(RALT(KC_QUOT), S(KC_4)), //^ $
     [TD_SIM10]    = ACTION_TAP_DANCE_DOUBLE(RALT(KC_NUHS), RALT(KC_MINS)), // ` BACKSLASH
     [TD_SIM12]    = ACTION_TAP_DANCE_DOUBLE(KC_PPLS, KC_PMNS), // + -
 
-    
+
     [TD_LEFT_K]   = ACTION_TAP_DANCE_FN(ts_action_LEFT_PAR_BRA), // ( { [ 
     [TD_RIGHT_K]  = ACTION_TAP_DANCE_FN(ts_action_RIGHT_PAR_BRA), // ) } ]
 };
@@ -128,7 +131,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MAYUS,          TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),    KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    LSFT_T(KC_LBRC), \
     LSFT_T(KC_TAB), KC_A,           KC_O,           KC_E, LT(_NUMPAD,KC_U),  KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
     KC_LCTRL,       TD(TD_DOTS),    KC_Q,           KC_J,           KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RGUI, \
-                                                 KC_LALT, NVIM_EMMET, LT(_LOWER,KC_SPC), LALT_T(KC_ESC),      LCTL_T(KC_COMM), LT(_HIGHER,KC_ENT), NVIM_VB, NUMTOGGLE \
+                                          KC_LALT, NVIM_EMMET, LT(_LOWER,KC_SPC), LALT_T(KC_ESC),   LCTL_T(KC_COMM), LT(_HIGHER,KC_ENT), NVIM_VB, NUMTOGGLE \
                                                    ),
 
     /* LOWER
@@ -147,17 +150,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
 
     [_LOWER] = LAYOUT( \
-    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                     XXXXXXX,     XXXXXXX,     KC_MPRV,     KC_MPLY,     KC_MNXT,     KC_BSPC,\
-    _______, KC_F6,   KC_F7,   KC_LALT,   KC_TAB,   KC_F10,                                    XXXXXXX,    XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX,     KC_AUDIO_VOL_UP, \
-    _______, KC_PGDN, KC_PGUP, COPY,  PASTE,  KC_F13,                                       TD(TD_SIM1), TD(TD_INTE), TD(TD_SIM2), TD(TD_SIM4), TD(TD_SIM5), KC_AUDIO_MUTE, \
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                 XXXXXXX,XXXXXXX, XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX, KC_AUDIO_VOL_DOWN, \
+    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                     XXXXXXX,    XXXXXXX,    KC_MPRV,    KC_MPLY,     KC_MNXT,     KC_BSPC,\
+    _______, KC_F6,   KC_F7,   KC_LALT,   KC_TAB,   KC_F10,                                 XXXXXXX,    TERM_TAB, TERM_DUPLI,    TERM_CLOSE, XXXXXXX,     KC_AUDIO_VOL_UP, \
+    _______, KC_PGDN, KC_PGUP, COPY,  PASTE,  KC_F13,                                       TD(TD_SIM1),TD(TD_INTE),TD(TD_SIM2),TD(TD_SIM4), TD(TD_SIM5), KC_AUDIO_MUTE, \
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                 XXXXXXX,XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,XXXXXXX, KC_AUDIO_VOL_DOWN, \
                                _______, _______, _______, _______,                          _______, _______, _______, _______\
     ),
+
+  TERM_DUPLI,
+  TERM_CLOSE,
+  TERM_TAB,
 
     /* HIGHER
      * ,---------------------------------------------------.                    ,------------------------------------------------------.
      * |DEL             |      |      |      |      |      |                    |      |  UP  |      |      |      |  BackSP           |
-    
+
      * |LShift / BMayus | HOME |PagUP |PScren|      |      |                    | LEFT | DOWN |RIGHT |   7  |  8   |  9                |
      * |----------------+------+------+------+------+------|                    |------+------+------+------+------+-------------------|
      * |TAB             |  =@  |  #$  |  `\  |  ¡!  |  +-  |-------.    ,-------|   %  |   /  |  *   |   4  |  5   |  6                |
