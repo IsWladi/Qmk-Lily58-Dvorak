@@ -20,6 +20,7 @@ enum {
     TD_PS,
     TD_LEFT_K,
     TD_RIGHT_K,
+    TD_CORCHETES_K,
     TD_PSCREN,
     TD_TILDE,
     TD_DOTS,
@@ -47,7 +48,6 @@ enum custom_keycodes {
   WT,
   COPY,
   PASTE,
-  NUMTOGGLE,
   NVIM_VB,
   NVIM_EMMET,
   TERM_DUPLI,
@@ -68,8 +68,6 @@ void ts_action_LEFT_PAR_BRA(qk_tap_dance_state_t *state, void *user_data) {
         SEND_STRING(SS_LSFT(SS_TAP(X_8)));
     } else if (state->count == 2) {
         SEND_STRING(SS_LSFT(SS_TAP(X_QUOTE)));
-    } else {
-        SEND_STRING(SS_TAP(X_QUOTE));
     }
     reset_tap_dance(state);
 }
@@ -78,7 +76,14 @@ void ts_action_RIGHT_PAR_BRA(qk_tap_dance_state_t *state, void *user_data) {
         SEND_STRING(SS_LSFT(SS_TAP(X_9)));
     } else if (state->count == 2) {
         SEND_STRING(SS_LSFT(SS_TAP(X_NUHS)));
-    } else {
+    }
+    reset_tap_dance(state);
+}
+
+void ts_action_corchetes(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        SEND_STRING(SS_TAP(X_QUOTE));
+    } else if (state->count == 2) {
         SEND_STRING(SS_TAP(X_NUHS));
     }
     reset_tap_dance(state);
@@ -103,9 +108,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_SIM10]    = ACTION_TAP_DANCE_DOUBLE(RALT(KC_NUHS), RALT(KC_MINS)), // ` BACKSLASH
     [TD_SIM12]    = ACTION_TAP_DANCE_DOUBLE(KC_PPLS, KC_PMNS), // + -
 
-
     [TD_LEFT_K]   = ACTION_TAP_DANCE_FN(ts_action_LEFT_PAR_BRA), // ( { [ 
     [TD_RIGHT_K]  = ACTION_TAP_DANCE_FN(ts_action_RIGHT_PAR_BRA), // ) } ]
+    [TD_CORCHETES_K]  = ACTION_TAP_DANCE_FN(ts_action_corchetes), // {}
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -117,7 +122,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |  BMayus        |  '"  |  ,<  |  .>  |   P  |   Y  |                    |   F  |   G  |   C  |   H  |   L  |  RShift / BMayus  |
      * |----------------+------+------+------+------+------|                    |------+------+------+------+------+-------------------|
      * |TAB  LSHIFT      |   A  |   O  |   E  |   U  |   I  |-------.    ,-------|   D  |   R  |   T  |  NÑ  |   S  |  BackSP           |
-     * |----------------+------+------+------+------+------|  ({[  |    |  ]})  |------+------+------+------+------+-------------------|
+     * |----------------+------+------+------+------+------|  ([{  |    |  }])  |------+------+------+------+------+-------------------|
      * |LCTRL           |  :;  |   Q  |   J  |   K  |   X  |-------|    |-------|   B  |   M  |   W  |   V  |   Z  |  RCTRL            |
      * `---------------------------------------------------/       /     \      \------------------------------------------------------'
      *                             | LAlt | LGUI |LOWER Space  | /ESC  / \PRNT AVANZADO \  |HIGHER Enter| ESC  |ADJUST|
@@ -131,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MAYUS,          TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),    KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    LSFT_T(KC_LBRC), \
     LSFT_T(KC_TAB), KC_A,           KC_O,           KC_E, LT(_NUMPAD,KC_U),  KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
     KC_LCTRL,       TD(TD_DOTS),    KC_Q,           KC_J,           KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RGUI, \
-                                          KC_LALT, NVIM_EMMET, LT(_LOWER,KC_SPC), LALT_T(KC_ESC),   LCTL_T(KC_COMM), LT(_HIGHER,KC_ENT), NVIM_VB, NUMTOGGLE \
+                                          KC_LALT, NVIM_EMMET, LT(_LOWER,KC_SPC), LALT_T(KC_ESC),   LCTL_T(KC_COMM), LT(_HIGHER,KC_ENT), TD(TD_CORCHETES_K), NVIM_VB \
                                                    ),
 
     /* LOWER
@@ -205,10 +210,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMPAD] = LAYOUT( \
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_I,                   XXXXXXX,KC_7,KC_8,KC_9, XXXXXXX, XXXXXXX, \
-    KC_TAB, XXXXXXX, XXXXXXX, XXXXXXX, TD(TD_SIM12), TD(TD_SIM1),           KC_0,KC_4,KC_5,KC_6, XXXXXXX, KC_BSPC, \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TD(TD_LEFT_K),   TD(TD_RIGHT_K), XXXXXXX, KC_1,KC_2,KC_3, XXXXXXX, XXXXXXX,\
-                                XXXXXXX, XXXXXXX, KC_SPC, KC_ESC,  _______,  KC_ENT, XXXXXXX, NUMTOGGLE \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,                   XXXXXXX,KC_7,KC_8,KC_9, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,           KC_0,KC_4,KC_5,KC_6, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, KC_1,KC_2,KC_3, XXXXXXX, XXXXXXX,\
+                                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX \
     ),
 
     };

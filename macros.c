@@ -115,24 +115,6 @@
       }
       break;
 
-      case NUMTOGGLE:
-      if (record->event.pressed) {
-        if (IS_LAYER_ON(_NUMPAD)) {
-          rgblight_toggle();
-          rgblight_increase_hue();
-          rgblight_decrease_hue();
-          layer_off(_NUMPAD);
-
-        } else {
-          rgblight_toggle();
-          rgblight_increase_hue();
-          rgblight_decrease_hue();
-          layer_on(_NUMPAD);
-        }
-        return true;
-      }
-      break;
-
       case NVIM_EMMET:
       if (record->event.pressed) {
         SEND_STRING(SS_DOWN(X_LCTRL) SS_TAP(X_Y));
