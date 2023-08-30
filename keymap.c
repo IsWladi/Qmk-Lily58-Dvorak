@@ -53,6 +53,8 @@ enum custom_keycodes {
   TERM_DUPLI,
   TERM_CLOSE,
   TERM_TAB,
+  WIN_ZOOM,
+
 };
 
 void ts_action_SIMB(qk_tap_dance_state_t *state, void *user_data) {
@@ -179,7 +181,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_HIGHER] = LAYOUT( \
     XXXXXXX, XXXXXXX,       XXXXXXX,       XXXXXXX,        XXXXXXX,       XXXXXXX,                             XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, \
-    _______, KC_HOME,       KC_PGUP,       KC_PSCR,        XXXXXXX,         XXXXXXX,                           DESK,    MAX,       MIN,     CLOSE,   WT,      XXXXXXX, \
+    _______, KC_HOME,       KC_PGUP,       KC_PSCR,        XXXXXXX,         XXXXXXX,                           DESK,    MAX,       MIN,     CLOSE,   WT,      WIN_ZOOM, \
     _______, TD(TD_SIM8),   TD(TD_SIM9),   TD(TD_SIM10),   TD(TD_EXCLA),  TD(TD_SIM12),                        BUSCADOR,KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT,    _______, \
     _______, KC_DEL,        KC_DEL,        KC_PGUP,         KC_PGDN,       KC_LCTRL,       XXXXXXX,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,     XXXXXXX, \
                                                             _______, _______, XXXXXXX,  XXXXXXX,      XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX \

@@ -160,6 +160,16 @@
         clear_keyboard();
       }
       break;
+
+      case WIN_ZOOM: //Activar lupa en windows
+      if (record->event.pressed){
+        // WINDOWS + +
+        SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_KP_PLUS) SS_TAP(X_KP_PLUS));
+      } else {
+        // Cuando la tecla es liberada
+        clear_keyboard();
+      }
+      break;
     }
     return true;
 }
