@@ -53,11 +53,14 @@ enum custom_keycodes {
   TERM_DUPLI,
   TERM_CLOSE,
   TERM_TAB,
-  WIN_ZOOM,
-
 };
 
-void ts_action_SIMB(qk_tap_dance_state_t *state, void *user_data) {
+void keyboard_post_init_user(void) {
+  // Desactiva la iluminación RGB al inicio
+  rgblight_disable();
+}
+
+void ts_action_SIMB(tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         SEND_STRING(SS_LALT("227"));
     } else if (state->count == 2) {
@@ -65,7 +68,7 @@ void ts_action_SIMB(qk_tap_dance_state_t *state, void *user_data) {
     }
     reset_tap_dance(state);
 }
-void ts_action_LEFT_PAR_BRA(qk_tap_dance_state_t *state, void *user_data) {
+void ts_action_LEFT_PAR_BRA(tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         SEND_STRING(SS_LSFT(SS_TAP(X_8)));
     } else if (state->count == 2) {
@@ -73,7 +76,7 @@ void ts_action_LEFT_PAR_BRA(qk_tap_dance_state_t *state, void *user_data) {
     }
     reset_tap_dance(state);
 }
-void ts_action_RIGHT_PAR_BRA(qk_tap_dance_state_t *state, void *user_data) {
+void ts_action_RIGHT_PAR_BRA(tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         SEND_STRING(SS_LSFT(SS_TAP(X_9)));
     } else if (state->count == 2) {
@@ -82,7 +85,7 @@ void ts_action_RIGHT_PAR_BRA(qk_tap_dance_state_t *state, void *user_data) {
     reset_tap_dance(state);
 }
 
-void ts_action_corchetes(qk_tap_dance_state_t *state, void *user_data) {
+void ts_action_corchetes(tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         SEND_STRING(SS_TAP(X_QUOTE));
     } else if (state->count == 2) {
@@ -91,7 +94,7 @@ void ts_action_corchetes(qk_tap_dance_state_t *state, void *user_data) {
     reset_tap_dance(state);
 }
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     [TD_INTE]    = ACTION_TAP_DANCE_DOUBLE(KC_EQUAL, KC_UNDS), // ¿?
     [TD_EXCLA]    = ACTION_TAP_DANCE_DOUBLE(S(KC_EQUAL), S(KC_1)), // ¡!
     [TD_PSCREN]   = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_PSCR), // ´ Print_screen
@@ -137,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_DEL,         KC_1,           KC_2,           KC_3,           KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,   RECORTE, \
     MAYUS,          TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),    KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    LSFT_T(KC_LBRC), \
     LSFT_T(KC_TAB), KC_A,           KC_O,           KC_E, LT(_NUMPAD,KC_U),  KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
-    KC_LCTRL,       TD(TD_DOTS),    KC_Q,           KC_J,           KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RGUI, \
+    _ADJUST,       TD(TD_DOTS),    KC_Q,           KC_J,           KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RGUI, \
                                           KC_LALT, NVIM_EMMET, LT(_LOWER,KC_SPC), LALT_T(KC_ESC),   LCTL_T(KC_COMM), LT(_HIGHER,KC_ENT), TD(TD_CORCHETES_K), NVIM_VB \
                                                    ),
 
@@ -181,9 +184,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_HIGHER] = LAYOUT( \
     XXXXXXX, XXXXXXX,       XXXXXXX,       XXXXXXX,        XXXXXXX,       XXXXXXX,                             XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, \
-    _______, KC_HOME,       KC_PGUP,       KC_PSCR,        XXXXXXX,         XXXXXXX,                           DESK,    MAX,       MIN,     CLOSE,   WT,      WIN_ZOOM, \
+    _______, KC_HOME,       KC_PGUP,       KC_PSCR,        XXXXXXX,         XXXXXXX,                           DESK,    MAX,       MIN,     CLOSE,   WT,      XXXXXXX, \
     _______, TD(TD_SIM8),   TD(TD_SIM9),   TD(TD_SIM10),   TD(TD_EXCLA),  TD(TD_SIM12),                        BUSCADOR,KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT,    _______, \
-    _______, KC_DEL,        KC_DEL,        KC_PGUP,         KC_PGDN,       KC_LCTRL,       XXXXXXX,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,     XXXXXXX, \
+    _______, KC_DEL,        KC_DEL,        KC_PGUP,         KC_PGDN,       KC_LCTL,       XXXXXXX,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,     XXXXXXX, \
                                                             _______, _______, XXXXXXX,  XXXXXXX,      XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX \
     ),
 
@@ -204,9 +207,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_ADJUST] = LAYOUT( \
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_MODE_PLAIN, RGB_TOG,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    XXXXXXX, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, RGB_MOD,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET, \
-    XXXXXXX, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+    QK_BOOTLOADER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_TOG,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOTLOADER, \
+    QK_REBOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_REBOOT, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
                                 XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX \
     ),
 

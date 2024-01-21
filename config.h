@@ -36,10 +36,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define TAPPING_TERM 100
 #define TAPPING_TERM 200
 //#define RETRO_TAPPING
-#define IGNORE_MOD_TAP_INTERRUPT
 
 #undef RGBLED_NUM
- 
+
 // #define RGBLIGHT_ANIMATIONS
 //#define RGBLIGHT_EFFECT_ALTERNATING
 //#define RGBLIGHT_EFFECT_BREATHING
@@ -56,7 +55,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_HUE_STEP 10
 #define RGBLIGHT_SAT_STEP 17
 #define RGBLIGHT_VAL_STEP 17
-#define RGBLIGHT_SPLIT  
+#define RGBLIGHT_SPLIT
 #define RGBLED_SPLIT { 8, 8 }
 // Underglow
 /*
