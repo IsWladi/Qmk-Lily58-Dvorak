@@ -11,16 +11,14 @@
 
 ## Requisitos para asegurar compatibilidad
 ---------------
-* QMK Firmware 0.18.9
+* QMK Firmware 0.23.5
 * Lily58 pro
 * Windows 11 distribucion latinoamericana español
 * PowerToys(para macro de alt + espacio)
 * Windows terminal
 
-
-### Problemas
----------------
-* errores en la integración de dvorak layout con nvim por remapeo de hjkl
+## Version antigua
+* QMK Firmware 0.18.9 - incompatible con la nueva configuracion
 
 ### Referencia
 *Repositorio usado en conjunto con [https://github.com/Wladimir3984/Neovim-Dvorak](https://github.com/Wladimir3984/Nvim) para sacarle más provecho*
