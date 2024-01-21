@@ -97,12 +97,16 @@
 
       case MAYUS:
       if (record->event.pressed) {
-        SEND_STRING(SS_TAP(X_CAPS));
-        rgblight_toggle();
-        rgblight_increase_hue();
-        rgblight_decrease_hue();
-        return true;
+          // Comprueba si la iluminación está apagada antes de alternar
+          if (!rgblight_is_enabled()) {
+              rgblight_enable(); // Enciende la iluminación si está apagada
+              rgblight_increase_hue(); // Opcional: ajusta el tono al encender
+          } else {
+              rgblight_disable(); // Apaga la iluminación si está encendida
+          }
+          SEND_STRING(SS_TAP(X_CAPS)); // Envia la señal de bloqueo de mayúsculas
       }
+      return true;
       break;
 
       case BUSCADOR:
@@ -156,16 +160,6 @@
 
         return true;
       }else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
-      case WIN_ZOOM: //Activar lupa en windows
-      if (record->event.pressed){
-        // WINDOWS + +
-        SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_KP_PLUS) SS_TAP(X_KP_PLUS));
-      } else {
         // Cuando la tecla es liberada
         clear_keyboard();
       }
