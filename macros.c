@@ -8,17 +8,7 @@
 
       case WT:
       if (record->event.pressed) {
-        SEND_STRING(SS_LGUI("r"));
-        _delay_ms(500);
-        SEND_STRING("wt" SS_TAP(X_ENTER));
-        return true;
-      }
-      break;
-
-      case RECORTE: //Macro en la que dejamos pulsadas las teclas
-      if (record->event.pressed){
-        // Cuando se pulsa la tecla con el keycode seleccionado
-        SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LSFT) SS_DOWN(X_S));
+        SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LALT) SS_TAP(X_T));
       } else {
         // Cuando la tecla es liberada
         clear_keyboard();

@@ -38,8 +38,7 @@ enum {
 
 // Creamos nuestros keycodes personalizados
 enum custom_keycodes {
-  RECORTE = SAFE_RANGE,
-  BUSCADOR,
+  BUSCADOR = SAFE_RANGE,
   MAYUS,
   MAX,
   MIN,
@@ -137,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_QWERTY] = LAYOUT( \
-    KC_DEL,         KC_1,           KC_2,           KC_3,           KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,   RECORTE, \
+    KC_DEL,         KC_1,           KC_2,           KC_3,           KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,   KC_PSCR, \
     MAYUS,          TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),    KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    LSFT_T(KC_LBRC), \
     LSFT_T(KC_TAB), KC_A,           KC_O,           KC_E, LT(_NUMPAD,KC_U),  KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
     _ADJUST,       TD(TD_DOTS),    KC_Q,           KC_J,           KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RGUI, \
@@ -160,9 +159,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
 
     [_LOWER] = LAYOUT( \
-    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                     XXXXXXX,    XXXXXXX,    KC_MPRV,    KC_MPLY,     KC_MNXT,     KC_BSPC,\
-    _______, KC_F6,   KC_F7,   KC_LALT,   KC_TAB,   KC_F10,                                 XXXXXXX,    TERM_TAB, TERM_DUPLI,    TERM_CLOSE, XXXXXXX,     KC_AUDIO_VOL_UP, \
-    _______, KC_PGDN, KC_PGUP, COPY,  PASTE,  KC_F13,                                       TD(TD_SIM1),TD(TD_INTE),TD(TD_SIM2),TD(TD_SIM4), TD(TD_SIM5), KC_AUDIO_MUTE, \
+    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                     KC_F6,    KC_F7,    KC_F8,    KC_F9,     KC_F10,     XXXXXXX,\
+    _______, XXXXXXX,   XXXXXXX,   KC_LALT,   KC_TAB,   XXXXXXX,                                 XXXXXXX,    XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX,     KC_AUDIO_VOL_UP, \
+    _______, XXXXXXX, XXXXXXX, COPY,  PASTE,  XXXXXXX,                                       TD(TD_SIM1),TD(TD_INTE),TD(TD_SIM2),TD(TD_SIM4), TD(TD_SIM5), KC_AUDIO_MUTE, \
     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                 XXXXXXX,XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,XXXXXXX, KC_AUDIO_VOL_DOWN, \
                                _______, _______, _______, _______,                          _______, _______, _______, _______\
     ),
@@ -186,7 +185,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, XXXXXXX,       XXXXXXX,       XXXXXXX,        XXXXXXX,       XXXXXXX,                             XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, \
     _______, KC_HOME,       KC_PGUP,       KC_PSCR,        XXXXXXX,         XXXXXXX,                           DESK,    MAX,       MIN,     CLOSE,   WT,      XXXXXXX, \
     _______, TD(TD_SIM8),   TD(TD_SIM9),   TD(TD_SIM10),   TD(TD_EXCLA),  TD(TD_SIM12),                        BUSCADOR,KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT,    _______, \
-    _______, KC_DEL,        KC_DEL,        KC_PGUP,         KC_PGDN,       KC_LCTL,       XXXXXXX,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,     XXXXXXX, \
+    _______, _______,        _______,        KC_PGUP,         KC_PGDN,       KC_LCTL,       XXXXXXX,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,     XXXXXXX, \
                                                             _______, _______, XXXXXXX,  XXXXXXX,      XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX \
     ),
 
@@ -216,9 +215,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NUMPAD] = LAYOUT( \
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,                   XXXXXXX,KC_7,KC_8,KC_9, XXXXXXX, XXXXXXX, \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,           KC_0,KC_4,KC_5,KC_6, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,           KC_0,KC_4,KC_5,KC_6, XXXXXXX, _______, \
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, KC_1,KC_2,KC_3, XXXXXXX, XXXXXXX,\
-                                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX \
+                                XXXXXXX, XXXXXXX, _______, XXXXXXX,  XXXXXXX,  _______, XXXXXXX, XXXXXXX \
     ),
 
     };
