@@ -43,10 +43,6 @@ enum custom_keycodes {
   DESK,
   CLOSE,
   WT,
-  COPY,
-  PASTE,
-  NVIM_VB,
-  NVIM_EMMET,
 };
 
 void keyboard_post_init_user(void) {
@@ -113,105 +109,47 @@ tap_dance_action_t tap_dance_actions[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    /* QWERTY
-     * ,---------------------------------------------------.                    ,------------------------------------------------------.
-     * |DEL             |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  ´ PScren         |
-     * |----------------+------+------+------+------+------|                    |------+------+------+------+------+-------------------|
-     * |  BMayus        |  '"  |  ,<  |  .>  |   P  |   Y  |                    |   F  |   G  |   C  |   H  |   L  |  RShift / BMayus  |
-     * |----------------+------+------+------+------+------|                    |------+------+------+------+------+-------------------|
-     * |TAB  LSHIFT      |   A  |   O  |   E  |   U  |   I  |-------.    ,-------|   D  |   R  |   T  |  NÑ  |   S  |  BackSP           |
-     * |----------------+------+------+------+------+------|  ([{  |    |  }])  |------+------+------+------+------+-------------------|
-     * |LCTRL           |  :;  |   Q  |   J  |   K  |   X  |-------|    |-------|   B  |   M  |   W  |   V  |   Z  |  RCTRL            |
-     * `---------------------------------------------------/       /     \      \------------------------------------------------------'
-     *                             | LAlt | LGUI |LOWER Space  | /ESC  / \PRNT AVANZADO \  |HIGHER Enter| ESC  |ADJUST|
-     *                             |      |      |      |/       /         \      \ |      |      |      |
-     *                             `----------------------------'           '------''--------------------'
-     */
-
-
     [_QWERTY] = LAYOUT( \
-    KC_DEL,         KC_1,           KC_2,           KC_3,           KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,   KC_PSCR, \
-    MAYUS,          TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),    KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    LSFT_T(KC_LBRC), \
-    LSFT_T(KC_TAB), KC_A,           KC_O,           KC_E, LT(_NUMPAD,KC_U),  KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
-    _ADJUST,       TD(TD_DOTS),    KC_Q,           KC_J,           KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RGUI, \
-                                          KC_LALT, NVIM_EMMET, LT(_LOWER,KC_SPC), LALT_T(KC_ESC),   LCTL_T(KC_COMM), LT(_HIGHER,KC_ENT), TD(TD_CORCHETES_K), NVIM_VB \
-                                                   ),
 
-    /* LOWER
-     * ,---------------------------------------------------.                    ,------------------------------------------------------.
-     * |DEL             |  F1  |  F2  |  F3  |  F4  |  F5  |                    |      |      |  <<  | PLAY |  >>  |  BackSP           |
-     * |----------------+------+------+------+------+------|                    |------+------+------+------+------+-------------------|
-     * |LShift / BMayus |  F6  |  F7  |  F8  |  F9  | F10  |                    |      |      |      |      |      |  VOL+             |
-     * |----------------+------+------+------+------+------|                    |------+------+------+------+------+-------------------|
-     * |TAB             | F11  | F12  | C    | P    | F13  |-------.    ,-------|  *\/ |  ¿?  |  &|  |  %^  |  _~  |  Mute             |
-     * |----------------+------+------+------+------+------|  ({[  |    |  ]})  |------+------+------+------+------+-------------------|
-     * |LCTRL           |      |      |      |      |      |-------|    |-------|CUENTA1|CUENTA2|CUENTA3|CUENTA4    |      |  VOL-             |
-     * `---------------------------------------------------/       /     \      \------------------------------------------------------'
-     *                             | LAlt | LGUI |LOWER | /Space  /       \Enter \  |HIGHER| ESC  | RGUI |
-     *                             |      |      |      |/       /         \      \ |      |      |      |
-     *                             `----------------------------'           '------''--------------------'
-     */
+    KC_DEL,         KC_1,           KC_2,           KC_3,             KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,    KC_PSCR, \
+    MAYUS,          TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),      KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    LSFT_T(KC_LBRC), \
+    LSFT_T(KC_TAB), KC_A,           KC_O,           KC_E, LT(_NUMPAD, KC_U),   KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
+    _ADJUST,        TD(TD_DOTS),    KC_Q,           KC_J,             KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RGUI, \
+                                          XXXXXXX, XXXXXXX, LT(_LOWER,KC_SPC),   LALT_T(KC_ESC),         LCTL_T(KC_COMM), LT(_HIGHER,KC_ENT), TD(TD_CORCHETES_K), XXXXXXX \
+                       ),
 
     [_LOWER] = LAYOUT( \
-    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                     KC_F6,    KC_F7,    KC_F8,    KC_F9,     KC_F10,     XXXXXXX,\
-    _______, XXXXXXX,   XXXXXXX,   KC_LALT,   KC_TAB,   XXXXXXX,                                 XXXXXXX,    XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX,     KC_AUDIO_VOL_UP, \
-    _______, XXXXXXX, XXXXXXX, COPY,  PASTE,  XXXXXXX,                                       TD(TD_SIM1),TD(TD_INTE),TD(TD_SIM2),TD(TD_SIM4), TD(TD_SIM5), KC_AUDIO_MUTE, \
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                 XXXXXXX,XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,XXXXXXX, KC_AUDIO_VOL_DOWN, \
-                               _______, _______, _______, _______,                          _______, _______, _______, _______\
+    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                       KC_F6,       KC_F7,       KC_F8,       KC_F9,       KC_F10,      XXXXXXX,\
+    _______, XXXXXXX, XXXXXXX, KC_LALT, KC_TAB,   XXXXXXX,                     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     KC_AUDIO_VOL_UP, \
+    _______, XXXXXXX, XXXXXXX, KC_COPY, KC_PASTE, XXXXXXX,                     TD(TD_SIM1), TD(TD_INTE), TD(TD_SIM2), TD(TD_SIM4), TD(TD_SIM5), KC_AUDIO_MUTE, \
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,    XXXXXXX,XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     KC_AUDIO_VOL_DOWN, \
+                           _______, _______, _______, _______,             _______, _______, _______, _______\
     ),
 
-    /* HIGHER
-     * ,---------------------------------------------------.                    ,------------------------------------------------------.
-     * |DEL             |      |      |      |      |      |                    |      |  UP  |      |      |      |  BackSP           |
-
-     * |LShift / BMayus | HOME |PagUP |PScren|      |      |                    | LEFT | DOWN |RIGHT |   7  |  8   |  9                |
-     * |----------------+------+------+------+------+------|                    |------+------+------+------+------+-------------------|
-     * |TAB             |  =@  |  #$  |  `\  |  ¡!  |  +-  |-------.    ,-------|   %  |   /  |  *   |   4  |  5   |  6                |
-     * |----------------+------+------+------+------+------|  ({[  |    |  ]})  |------+------+------+------+------+-------------------|
-     * |LCTRL           |  DEL | SUPR |  END |PAG UP|      |-------|    |-------|   -  |   +  |      |   1  |  2   |  3                |
-     * `---------------------------------------------------/       /     \      \------------------------------------------------------'
-     *                             | LAlt | LGUI |LOWER | /Space  /       \Enter \  |   0  |   .  |   =  |
-     *                             |      |      |      |/       /         \      \ |      |      |      |
-     *                             `----------------------------'           '------''--------------------'
-     */
 
     [_HIGHER] = LAYOUT( \
-    XXXXXXX, XXXXXXX,       XXXXXXX,       XXXXXXX,        XXXXXXX,       XXXXXXX,                             XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, \
-    _______, KC_HOME,       KC_PGUP,       KC_PSCR,        XXXXXXX,         XXXXXXX,                           DESK,    MAX,       MIN,     CLOSE,   WT,      XXXXXXX, \
-    _______, TD(TD_SIM8),   TD(TD_SIM9),   TD(TD_SIM10),   TD(TD_EXCLA),  TD(TD_SIM12),                        XXXXXXX,KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT,    _______, \
-    _______, _______,        _______,        KC_PGUP,         KC_PGDN,       KC_LCTL,       XXXXXXX,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,     XXXXXXX, \
-                                                            _______, _______, XXXXXXX,  XXXXXXX,      XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX \
+    XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX,      XXXXXXX,      XXXXXXX,                             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, \
+    XXXXXXX, KC_HOME,     KC_PGUP,     KC_PSCR,      XXXXXXX,      XXXXXXX,                             DESK,    MAX,     MIN,     CLOSE,   WT,      XXXXXXX, \
+    XXXXXXX, TD(TD_SIM8), TD(TD_SIM9), TD(TD_SIM10), TD(TD_EXCLA), TD(TD_SIM12),                        XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, \
+    XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX,      XXXXXXX,      XXXXXXX,       XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+                                                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX \
     ),
 
-    /* ADJUST
-     * ,---------------------------------------------------.                    ,------------------------------------------------------.
-     * |DEL             |      |      |      |      |      |                    |      |      |      |      |      |  BackSP           |
-     * |----------------+------+------+------+------+------|                    |------+------+------+------+------+-------------------|
-     * |LShift / BMayus |      |      |      |      | TOG  |                    |      |      |      |      |      |                   |
-     * |----------------+------+------+------+------+------|                    |------+------+------+------+------+-------------------|
-     * |TAB             |  HUI |  SAI |  VAI |  SPI | MOD  |-------.    ,-------|      |      |      |      |      |  RESET            |
-     * |----------------+------+------+------+------+------|  ({[  |    |  ]})  |------+------+------+------+------+-------------------|
-     * |LCTRL           |  HUD |  SAD |  VAD |  SPD |      |-------|    |-------|      |      |      |      |      |                   |
-     * `---------------------------------------------------/       /     \      \------------------------------------------------------'
-     *                             | LAlt | LGUI |LOWER | /Space  /       \Enter \  |HIGHER| ESC  | RGUI |
-     *                             |      |      |      |/       /         \      \ |      |      |      |
-     *                             `----------------------------'           '------''--------------------'
-     */
 
     [_ADJUST] = LAYOUT( \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
     QK_BOOTLOADER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_TOG,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOTLOADER, \
-    QK_REBOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_REBOOT, \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
-                                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX \
+    QK_REBOOT,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_REBOOT, \
+    XXXXXXX,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+                                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX \
     ),
 
     [_NUMPAD] = LAYOUT( \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,                   XXXXXXX,KC_7,KC_8,KC_9, XXXXXXX, XXXXXXX, \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,           KC_0,KC_4,KC_5,KC_6, XXXXXXX, _______, \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, KC_1,KC_2,KC_3, XXXXXXX, XXXXXXX,\
-                                XXXXXXX, XXXXXXX, _______, XXXXXXX,  XXXXXXX,  _______, XXXXXXX, XXXXXXX \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, KC_7,    KC_8,    KC_9,    XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_0,    KC_4,    KC_5,    KC_6,    XXXXXXX, _______, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, KC_1,    KC_2,    KC_3,    XXXXXXX, XXXXXXX,\
+                             XXXXXXX, XXXXXXX, _______, XXXXXXX,       XXXXXXX,  _______, XXXXXXX, XXXXXXX \
     ),
 
     };

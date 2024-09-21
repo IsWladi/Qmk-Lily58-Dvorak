@@ -15,36 +15,6 @@
       }
       break;
 
-      case COPY: //Macro en la que dejamos pulsadas las teclas
-      if (record->event.pressed){
-        // Cuando se pulsa la tecla con el keycode seleccionado
-        SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_C));
-      } else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
-      case PASTE: //Macro en la que dejamos pulsadas las teclas
-      if (record->event.pressed){
-        // Cuando se pulsa la tecla con el keycode seleccionado
-        SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_V));
-      } else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
-      case NVIM_VB: //nvim modo visual bloque
-      if (record->event.pressed){
-        // Cuando se pulsa la tecla con el keycode seleccionado
-        SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LALT) SS_TAP(X_V));
-      } else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
       case CLOSE: //Macro en la que dejamos pulsadas las teclas
       if (record->event.pressed){
         // Cuando se pulsa la tecla con el keycode seleccionado
@@ -97,19 +67,6 @@
           SEND_STRING(SS_TAP(X_CAPS)); // Envia la señal de bloqueo de mayúsculas
       }
       return true;
-      break;
-
-      case NVIM_EMMET:
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_Y));
-        clear_keyboard();
-        SEND_STRING(SS_TAP(X_COMM));
-
-        return true;
-      }else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
       break;
     }
     return true;
