@@ -114,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_DEL,         KC_1,           KC_2,           KC_3,             KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,         KC_0,    KC_PSCR, \
     MAYUS,          TD(TD_TILDE),   TD(TD_MINT),    TD(TD_BIGT),      KC_P,    KC_Y,                                  KC_F,    KC_G,    KC_C,    KC_H,         KC_L,    LSFT_T(KC_LBRC), \
     LSFT_T(KC_TAB), KC_A,           KC_O,           KC_E, LT(_NUMPAD, KC_U),   KC_I,                                  KC_D,    KC_R,    KC_T,    TD(TD_NN),    KC_S,    KC_BSPC, \
-    _ADJUST,        TD(TD_DOTS),    KC_Q,           KC_J,             KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RGUI, \
+    XXXXXXX,        TD(TD_DOTS),    KC_Q,           KC_J,             KC_K,    KC_X, TD(TD_LEFT_K),   TD(TD_RIGHT_K), KC_B,    KC_M,    KC_W,    KC_V,         KC_Z,    KC_RGUI, \
                                           XXXXXXX, XXXXXXX, LT(_LOWER,KC_SPC),   LALT_T(KC_ESC),         LCTL_T(KC_COMM), LT(_HIGHER,KC_ENT), TD(TD_CORCHETES_K), XXXXXXX \
                        ),
 
@@ -132,12 +132,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, KC_HOME,     KC_PGUP,     KC_PSCR,      XXXXXXX,      XXXXXXX,                             DESK,    MAX,     MIN,     CLOSE,   WT,      XXXXXXX, \
     XXXXXXX, TD(TD_SIM8), TD(TD_SIM9), TD(TD_SIM10), TD(TD_EXCLA), TD(TD_SIM12),                        XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, \
     XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX,      XXXXXXX,      XXXXXXX,       XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-                                                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX \
+                                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX \
     ),
 
 
+    // https://docs.qmk.fm/keycodes#rgb-matrix-lighting
     [_ADJUST] = LAYOUT( \
-    XXXXXXX,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    RGB_TOG,       RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
     QK_BOOTLOADER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_TOG,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOTLOADER, \
     QK_REBOOT,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_REBOOT, \
     XXXXXXX,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
