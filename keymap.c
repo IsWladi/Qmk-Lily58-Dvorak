@@ -100,7 +100,7 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_SIM8]     = ACTION_TAP_DANCE_DOUBLE(S(KC_0),  RALT(KC_Q)), // = @
     [TD_SIM9]     = ACTION_TAP_DANCE_DOUBLE(RALT(KC_QUOT), S(KC_4)), //^ $
     [TD_SIM10]    = ACTION_TAP_DANCE_DOUBLE(RALT(KC_NUHS), RALT(KC_MINS)), // ` BACKSLASH
-    [TD_SIM12]    = ACTION_TAP_DANCE_DOUBLE(KC_PPLS, KC_MINUS), // + -
+    [TD_SIM12]    = ACTION_TAP_DANCE_DOUBLE(KC_PPLS, KC_SLASH), // + -
 
     [TD_LEFT_K]   = ACTION_TAP_DANCE_FN(ts_action_LEFT_PAR_BRA), // ( { [ 
     [TD_RIGHT_K]  = ACTION_TAP_DANCE_FN(ts_action_RIGHT_PAR_BRA), // ) } ]
