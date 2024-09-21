@@ -99,54 +99,11 @@
       return true;
       break;
 
-      case BUSCADOR:
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_SPC));
-        return true;
-      }else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
       case NVIM_EMMET:
       if (record->event.pressed) {
         SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_Y));
         clear_keyboard();
         SEND_STRING(SS_TAP(X_COMM));
-
-        return true;
-      }else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
-      case TERM_DUPLI: // ctrl shift d duplicar terminarl(abrir nueva pestaña)
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LSFT) SS_TAP(X_D));
-
-        return true;
-      }else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
-      case TERM_CLOSE: // ctrl shift w cerrar terminal(cerrar pestaña actual o la terminar si solo hay una)
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LSFT) SS_TAP(X_W));
-
-        return true;
-      }else {
-        // Cuando la tecla es liberada
-        clear_keyboard();
-      }
-      break;
-
-      case TERM_TAB: // ctrl tab cambiarse de terminal
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_TAB));
 
         return true;
       }else {

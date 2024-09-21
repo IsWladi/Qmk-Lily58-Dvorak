@@ -21,7 +21,6 @@ enum {
     TD_LEFT_K,
     TD_RIGHT_K,
     TD_CORCHETES_K,
-    TD_PSCREN,
     TD_TILDE,
     TD_DOTS,
     TD_MINT,
@@ -38,8 +37,7 @@ enum {
 
 // Creamos nuestros keycodes personalizados
 enum custom_keycodes {
-  BUSCADOR = SAFE_RANGE,
-  MAYUS,
+  MAYUS = SAFE_RANGE,
   MAX,
   MIN,
   DESK,
@@ -49,9 +47,6 @@ enum custom_keycodes {
   PASTE,
   NVIM_VB,
   NVIM_EMMET,
-  TERM_DUPLI,
-  TERM_CLOSE,
-  TERM_TAB,
 };
 
 void keyboard_post_init_user(void) {
@@ -96,7 +91,6 @@ void ts_action_corchetes(tap_dance_state_t *state, void *user_data) {
 tap_dance_action_t tap_dance_actions[] = {
     [TD_INTE]    = ACTION_TAP_DANCE_DOUBLE(KC_EQUAL, KC_UNDS), // ¿?
     [TD_EXCLA]    = ACTION_TAP_DANCE_DOUBLE(S(KC_EQUAL), S(KC_1)), // ¡!
-    [TD_PSCREN]   = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_PSCR), // ´ Print_screen
     [TD_NN]       = ACTION_TAP_DANCE_DOUBLE(KC_N, KC_SCLN), // n ñ
     [TD_TILDE]    = ACTION_TAP_DANCE_DOUBLE(S(KC_2), KC_MINS), // " '
     [TD_DOTS]     = ACTION_TAP_DANCE_DOUBLE(S(KC_DOT), S(KC_COMM)), // : ;
@@ -110,7 +104,7 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_SIM8]     = ACTION_TAP_DANCE_DOUBLE(S(KC_0),  RALT(KC_Q)), // = @
     [TD_SIM9]     = ACTION_TAP_DANCE_DOUBLE(RALT(KC_QUOT), S(KC_4)), //^ $
     [TD_SIM10]    = ACTION_TAP_DANCE_DOUBLE(RALT(KC_NUHS), RALT(KC_MINS)), // ` BACKSLASH
-    [TD_SIM12]    = ACTION_TAP_DANCE_DOUBLE(KC_PPLS, KC_PMNS), // + -
+    [TD_SIM12]    = ACTION_TAP_DANCE_DOUBLE(KC_PPLS, KC_MINUS), // + -
 
     [TD_LEFT_K]   = ACTION_TAP_DANCE_FN(ts_action_LEFT_PAR_BRA), // ( { [ 
     [TD_RIGHT_K]  = ACTION_TAP_DANCE_FN(ts_action_RIGHT_PAR_BRA), // ) } ]
@@ -184,7 +178,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_HIGHER] = LAYOUT( \
     XXXXXXX, XXXXXXX,       XXXXXXX,       XXXXXXX,        XXXXXXX,       XXXXXXX,                             XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, \
     _______, KC_HOME,       KC_PGUP,       KC_PSCR,        XXXXXXX,         XXXXXXX,                           DESK,    MAX,       MIN,     CLOSE,   WT,      XXXXXXX, \
-    _______, TD(TD_SIM8),   TD(TD_SIM9),   TD(TD_SIM10),   TD(TD_EXCLA),  TD(TD_SIM12),                        BUSCADOR,KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT,    _______, \
+    _______, TD(TD_SIM8),   TD(TD_SIM9),   TD(TD_SIM10),   TD(TD_EXCLA),  TD(TD_SIM12),                        XXXXXXX,KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT,    _______, \
     _______, _______,        _______,        KC_PGUP,         KC_PGDN,       KC_LCTL,       XXXXXXX,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,     XXXXXXX, \
                                                             _______, _______, XXXXXXX,  XXXXXXX,      XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX \
     ),
