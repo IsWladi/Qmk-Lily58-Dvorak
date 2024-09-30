@@ -21,11 +21,11 @@ enum {
     TD_LEFT_K,
     TD_RIGHT_K,
     TD_CORCHETES_K,
+    TD_FORWARD_SLASH,
     TD_TILDE,
     TD_DOTS,
     TD_MINT,
     TD_BIGT,
-    TD_SIM1,
     TD_SIM2,
     TD_SIM4,
     TD_SIM5,
@@ -84,6 +84,15 @@ void ts_action_corchetes(tap_dance_state_t *state, void *user_data) {
     reset_tap_dance(state);
 }
 
+void ts_action_forward_slash(tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        SEND_STRING(SS_LSFT(SS_TAP(X_7)));
+    } else if (state->count == 2) {
+        SEND_STRING(SS_TAP(X_PAST));
+    }
+    reset_tap_dance(state);
+}
+
 tap_dance_action_t tap_dance_actions[] = {
     [TD_INTE]    = ACTION_TAP_DANCE_DOUBLE(KC_EQUAL, KC_UNDS), // ¿?
     [TD_EXCLA]    = ACTION_TAP_DANCE_DOUBLE(S(KC_EQUAL), S(KC_1)), // ¡!
@@ -92,7 +101,6 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_DOTS]     = ACTION_TAP_DANCE_DOUBLE(S(KC_DOT), S(KC_COMM)), // : ;
     [TD_MINT]     = ACTION_TAP_DANCE_DOUBLE(KC_COMM, KC_NUBS), // , <
     [TD_BIGT]     = ACTION_TAP_DANCE_DOUBLE(KC_DOT, S(KC_NUBS)), // . >
-    [TD_SIM1]     = ACTION_TAP_DANCE_DOUBLE(KC_PSLS, KC_PAST), // / *
     [TD_SIM2]     = ACTION_TAP_DANCE_DOUBLE(S(KC_6), KC_GRV), // & |
     [TD_SIM4]     = ACTION_TAP_DANCE_DOUBLE(KC_PERC, S(KC_3)), // % #
     [TD_SIM5]     = ACTION_TAP_DANCE_DOUBLE(S(KC_SLSH), RALT(KC_RBRC)), // _  ~
@@ -105,6 +113,7 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_LEFT_K]   = ACTION_TAP_DANCE_FN(ts_action_LEFT_PAR_BRA), // ( { [ 
     [TD_RIGHT_K]  = ACTION_TAP_DANCE_FN(ts_action_RIGHT_PAR_BRA), // ) } ]
     [TD_CORCHETES_K]  = ACTION_TAP_DANCE_FN(ts_action_corchetes), // {}
+    [TD_FORWARD_SLASH]     = ACTION_TAP_DANCE_FN(ts_action_forward_slash), // / *
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -121,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LOWER] = LAYOUT( \
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                       KC_F6,       KC_F7,       KC_F8,       KC_F9,       KC_F10,      XXXXXXX,\
     _______, XXXXXXX, XXXXXXX, KC_LALT, KC_TAB,   XXXXXXX,                     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     KC_AUDIO_VOL_UP, \
-    _______, XXXXXXX, XXXXXXX, KC_COPY, KC_PASTE, XXXXXXX,                     TD(TD_SIM1), TD(TD_INTE), TD(TD_SIM2), TD(TD_SIM4), TD(TD_SIM5), KC_AUDIO_MUTE, \
+    _______, XXXXXXX, XXXXXXX, KC_COPY, KC_PASTE, XXXXXXX,                     TD(TD_FORWARD_SLASH), TD(TD_INTE), TD(TD_SIM2), TD(TD_SIM4), TD(TD_SIM5), KC_AUDIO_MUTE, \
     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,    XXXXXXX,XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     KC_AUDIO_VOL_DOWN, \
                            _______, _______, _______, _______,             _______, _______, _______, _______\
     ),
